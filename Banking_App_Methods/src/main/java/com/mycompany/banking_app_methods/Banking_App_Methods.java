@@ -1,8 +1,10 @@
 package com.mycompany.banking_app_methods;
 
-public class Banking_App_Methods {
+public class Banking_App_Methods 
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         
         // Starting balance in the account
         double balance = 500.00; // Variable to hold the balance amount
@@ -11,10 +13,17 @@ public class Banking_App_Methods {
         
         double withdrawAmount = 150.00;
         
+        // To use the method, we hate to call/invoke the method by its name
+        // Syntax: method();
+        displayInfo();
     } // closing brace for the main method
     
-    public static void displayInfo(){
-        
+    // Method with no parameters & no return
+    public static void displayInfo()
+    {
+        System.out.println("ABC BANK");
+        System.out.println("123 Happy Place");
+        System.out.println("Welcome to your app!");
     }
     
 }
