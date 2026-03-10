@@ -16,6 +16,13 @@ public class Banking_App_Methods
         System.out.println("Current Balance " + balance);
     }
     
+    // Method: Withdra (method with parameters + return)
+    public static double withdraw(double balance, double amount)
+    {
+        double newBalance = balance - amount;
+        return newBalance;
+    }
+    
     public static void main(String[] args) 
     {
         
