@@ -4,6 +4,13 @@ public class Banking_App_Methods {
 
     public static void main(String[] args) {
         
+        // Starting balance in the account
+        double balance = 500.00; // Variable to hold the balance amount
+        
+        double deposit = 200.00;
+        
+        double withdrawAmount = 150.00;
+        
     }
 }
 
