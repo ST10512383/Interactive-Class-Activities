@@ -27,6 +27,7 @@ public class Banking_App_Methods
         // To use the method, we hate to call/invoke the method by its name
         // Syntax: method();
         displayInfo();
+        
         // Call deposit method(Shares 2 pieces of information)
         balance = deposit(balance, deposit); // Pass arguements
         
