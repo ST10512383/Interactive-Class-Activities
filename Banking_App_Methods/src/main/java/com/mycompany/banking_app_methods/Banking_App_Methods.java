@@ -3,14 +3,18 @@ package com.mycompany.banking_app_methods;
 public class Banking_App_Methods 
 {
 
+    // Method: Deposit
+    public static double deposit(double balance, double amount)
+    {
+        double newBalance = balance + amount;
+    }
+    
     public static void main(String[] args) 
     {
         
         // Starting balance in the account
         double balance = 500.00; // Variable to hold the balance amount
-        
         double deposit = 200.00;
-        
         double withdrawAmount = 150.00;
         
         // To use the method, we hate to call/invoke the method by its name
