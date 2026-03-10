@@ -52,12 +52,14 @@ public class Banking_App_Methods
         
         // Print balance in output
         displayBalance(balance);
+        displayTransaction("Deposit", deposit, balance);
         
         // Call withdraw method
         balance = withdraw(balance, withdrawAmount);
         
         // Print Balance
         displayBalance(balance);
+        displayTransaction("Withdraw", withdrawAmount);
     } // closing brace for the main method
     
     // Method with no parameters & no return
