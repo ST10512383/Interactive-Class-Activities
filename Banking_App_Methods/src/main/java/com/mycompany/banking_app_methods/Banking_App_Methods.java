@@ -11,7 +11,12 @@ public class Banking_App_Methods {
         
         double withdrawAmount = 150.00;
         
+    } // closing brace for the main method
+    
+    public static void displayInfo(){
+        
     }
+    
 }
 
 /*
