@@ -23,6 +23,18 @@ public class Banking_App_Methods
         return newBalance;
     }
     
+    // Method overloading - Same method name but different parameters
+    public static void displayTransaction(String type, double amount)
+    {
+        System.out.println("Transaction: " + type + "| Amount: R " + amount);
+    }
+    
+    // Method overloading - Same method name but with a different set of parameters & instructions
+    public static void displayTransaction(String type, double amount, double balance)
+    {
+        System.out.println("Transaction: " + type + "| Amount: R " + amount + "| Balance: R " + balance);
+    }
+    
     public static void main(String[] args) 
     {
         
