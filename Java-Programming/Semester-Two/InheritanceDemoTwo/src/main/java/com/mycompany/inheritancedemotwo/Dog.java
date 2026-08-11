@@ -3,7 +3,7 @@ package com.mycompany.inheritancedemotwo;
 public class Dog extends Pet {
 
     public Dog() {
-
+        
     }
 
     public Dog(String name, int age) {
