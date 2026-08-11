@@ -16,5 +16,11 @@ public class InheritanceDemoTwo {
         System.out.print("Enter the dog's name >>> ");
         String name = userInput.nextLine();
         d3.setName(name);
+        System.out.println("The Dog's name is: " + d3.getName());
+        
+        System.out.println("Enter the dog's age >>> ");
+        int age = userInput.nextInt();
+        d3.setAge(age);
+        System.out.println("The Dog's age is: " + d3.getAge());
     }
 }
