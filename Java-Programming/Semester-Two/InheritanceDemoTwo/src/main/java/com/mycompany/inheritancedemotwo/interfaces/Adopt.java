@@ -1,5 +1,5 @@
 package com.mycompany.inheritancedemotwo.interfaces;
 
-public interface Adoptable {
+public interface Adopt {
     void prepareForAdoption();
 }

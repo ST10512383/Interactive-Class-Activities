@@ -1,8 +1,8 @@
 package com.mycompany.inheritancedemotwo;
 
-import com.mycompany.inheritancedemotwo.interfaces.Adoptable;
+import com.mycompany.inheritancedemotwo.interfaces.Adopt;
 
-public class Cat extends Pet implements Adoptable {
+public class Cat extends Pet implements Adopt {
     private String color;
     
     public Cat(String name, int age, String color) {
