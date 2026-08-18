@@ -18,7 +18,7 @@ public class Dog extends Pet implements Adopt{
 
     @Override // Override Pet class
     public void makeSound() {
-        System.out.println(getName() + "says Woof!");
+        System.out.println(getName() + " says Woof!");
     }
 
     public void fetch() {
@@ -26,7 +26,7 @@ public class Dog extends Pet implements Adopt{
     }
 
     // Interface method
-//    @Override // Override Pet class
+    @Override // Override Pet class
     public void prepareForAdoption() {
         System.out.println(getName() + " is being prepared for adoption");
     }

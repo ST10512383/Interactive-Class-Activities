@@ -31,9 +31,12 @@ public abstract class Pet {
     }
 
     // Overriden method
+    @Override
     public String toString() { // From the Object class
         return "Pet name: " + name + ", Age: " + age;
     }
+    
+
 
     public int getAge() {
         return age;

@@ -24,7 +24,7 @@ public class Cat extends Pet implements Adopt {
         System.out.println(getName() + " is climbing.");
     }
     
-//    @Override
+    @Override
     public void prepareForAdoption() {
         System.out.println(getName() + " is being prepared for adoption.");
     }
