@@ -1,6 +1,6 @@
 package com.mycompany.inheritancedemotwo;
 
-import com.mycompany.inheritancedemotwo.Adoptable;
+import com.mycompany.inheritancedemotwo.interfaces.Adoptable;
 
 public class Dog extends Pet implements Adoptable{
 
