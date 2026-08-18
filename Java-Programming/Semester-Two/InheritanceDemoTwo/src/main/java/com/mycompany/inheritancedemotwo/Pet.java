@@ -1,9 +1,13 @@
 package com.mycompany.inheritancedemotwo;
 
-public class Pet {
+public abstract class Pet {
 
     private String name;
     private int age;
+    
+    public void Pet() {
+        
+    }
 
     public void Pet(String name, int age) {
         this.name = name;
@@ -18,8 +22,17 @@ public class Pet {
         System.out.println(name + " is sleeping.");
     }
 
-    public void makeSound() {
+    // Abstract method
+    public abstract void makeSound();
 
+    // Final Method
+    public final void registerPet() {
+        System.out.println(name + " has been registered.");
+    }
+
+    // Overriden method
+    public String toString() { // From the Object class
+        return "Pet name: " + name + ", Age: " + age;
     }
 
     public int getAge() {
@@ -29,6 +42,8 @@ public class Pet {
     public void setAge(int age) {
         if (age >= 0) {
             this.age = age;
+        } else {
+            System.out.println("Age cannot be negative");
         }
     }
 
