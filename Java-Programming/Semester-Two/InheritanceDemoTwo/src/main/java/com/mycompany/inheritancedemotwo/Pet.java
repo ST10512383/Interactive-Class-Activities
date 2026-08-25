@@ -2,16 +2,18 @@ package com.mycompany.inheritancedemotwo;
 
 public abstract class Pet {
 
+    private String rescueID;
     private String name;
     private int age;
     
     public void Pet() {
         
     }
-
-    public void Pet(String name, int age) {
+    
+    public void Pet(String resID, String name, int age) {
+        this.rescueID = resID;
         this.name = name;
-        this.age = age;
+        setAge(age);
     }
 
     public void eat() {
@@ -36,7 +38,28 @@ public abstract class Pet {
         return "Pet name: " + name + ", Age: " + age;
     }
     
-
+    @Override
+    public boolean equals(Object obj) {
+        
+        // Check if the references point to the same object
+        if (this == obj) {
+            return true;
+        }
+        
+        // Check if object is empty
+        if (obj == null) {
+            return false;
+        }
+        
+        // Check if object is an instance of Pet
+        if (!(obj instanceof Pet)) {
+            return false;
+        }
+        
+        Pet other = (Pet) obj;
+        
+        return rescueID.equals(other.rescueID);
+    }
 
     public int getAge() {
         return age;
@@ -56,5 +79,9 @@ public abstract class Pet {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public String getRescueID() {
+        return rescueID;
     }
 }

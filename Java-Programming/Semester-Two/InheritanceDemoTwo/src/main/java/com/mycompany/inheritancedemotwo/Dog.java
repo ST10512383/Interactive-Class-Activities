@@ -6,8 +6,8 @@ public class Dog extends Pet implements Adopt{
 
     private String breed;
 
-    public Dog(String name, int age, String breed) {
-        super.Pet(name, age);
+    public Dog(String resID, String name, int age, String breed) {
+        super.Pet(resID, name, age);
         this.breed = breed;
     }
 

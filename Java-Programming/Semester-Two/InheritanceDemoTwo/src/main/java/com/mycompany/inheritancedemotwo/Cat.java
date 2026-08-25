@@ -5,8 +5,8 @@ import com.mycompany.inheritancedemotwo.interfaces.Adopt;
 public class Cat extends Pet implements Adopt {
     private String color;
     
-    public Cat(String name, int age, String color) {
-        super.Pet(name, age);
+    public Cat(String resID, String name, int age, String color) {
+        super.Pet(resID, name, age);
         
         this.color = color;
     }

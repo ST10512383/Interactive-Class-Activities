@@ -8,7 +8,7 @@ public class InheritanceDemoTwo {
 
         Pet petOne; // Declare petOne object (empty box in memory)
 
-        petOne = new Dog("Mia", 8, "Dachshund"); // Instantiate petOne object (filled box in memory)
+        petOne = new Dog("PET001", "Mia", 8, "Dachshund"); // Instantiate petOne object (filled box in memory)
 
         petOne.makeSound(); // Call the overridden Dog classes makeSound method
 
@@ -16,22 +16,22 @@ public class InheritanceDemoTwo {
         Pet[] pets = new Pet[3];
 
         // Populate the array
-        pets[0] = new Dog("Gindo", 6, "Husky");
-        pets[1] = new Cat("Catto", 3, "Ginger");
-        pets[2] = new Dog("Chokkie", 9, "Dachshund");
+        pets[0] = new Dog("PETS001", "Gindo", 6, "Husky");
+        pets[1] = new Cat("PETS002", "Catto", 3, "Ginger");
+        pets[2] = new Dog("PETS003", "Chokkie", 9, "Dachshund");
 
         for (Pet pet : pets) {
             pet.makeSound();
         }
 
-        Dog dog = new Dog("Buddy", 4, "Labrador");
+        Dog dog = new Dog("PET002", "Buddy", 4, "Labrador");
         System.out.println(dog);
 
         // Method of class's equals() method
-        Dog d1 = new Dog("Sam", 3, "Pitbull");
-        Dog d2 = new Dog("Kate", 5, "Doberman");
-
-        System.out.println(d1.equals(d2));
+        Dog d1 = new Dog("RES001", "Kate", 5, "Doberman");
+        Dog d2 = new Dog("RES001", "Kate", 5, "Doberman");
+        
+        System.out.println(d1.equals(d2)); // Compares object references so its false because memory block is different
 
         // Old code
 //        Scanner userInput = new Scanner(System.in);
