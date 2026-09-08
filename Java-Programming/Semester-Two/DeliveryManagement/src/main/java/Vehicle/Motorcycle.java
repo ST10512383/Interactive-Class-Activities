@@ -1,10 +1,12 @@
 package Vehicle;
 
+import Exceptions.InvalidVehicleIDException;
+
 public class Motorcycle extends DeliveryVehicle {
     
     private boolean hasDeliveryBox;
     
-    public Motorcycle(String vehicleID, String driverName, String deliveryStatus, boolean hasDeliveryBox) {
+    public Motorcycle(String vehicleID, String driverName, String deliveryStatus, boolean hasDeliveryBox) throws InvalidVehicleIDException {
         
         super(vehicleID, driverName, deliveryStatus);
         this.hasDeliveryBox = hasDeliveryBox;

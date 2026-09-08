@@ -1,16 +1,28 @@
 package Vehicle;
 
+import Exceptions.*;
+
 public class Van extends DeliveryVehicle {
 
     private int capacity;
 
-    public Van(String vehicleId, String driverName, String deliveryStatus, int capacity) {
+    public Van(String vehicleId, String driverName, String deliveryStatus, int capacity) throws InvalidVehicleIDException, InvalidCapacityException {
         super(vehicleId, driverName, deliveryStatus);
-        this.capacity = capacity;
+        setCapacity(capacity);
     }
 
+    // Getter
     public int getCapacity() {
         return capacity;
+    }
+
+    // Setter: Called when the user provides a value for the van's capacity
+    public void setCapacity(int capacity) throws InvalidCapacityException {
+        
+        if (capacity <= 0) {
+            throw new InvalidCapacityException("Capacity must be greater than zero.");
+        }
+        this.capacity = capacity;
     }
 
     @Override
