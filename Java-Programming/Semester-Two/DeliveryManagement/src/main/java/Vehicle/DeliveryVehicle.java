@@ -11,16 +11,27 @@ public abstract class DeliveryVehicle implements Trackable {
     private String deliveryStatus;
 
     // Constructor
-    public DeliveryVehicle(String vID, String dName, String delStatus) throws InvalidVehicleIDException {
-        validateVehicleId(vehicleId);
+//    public DeliveryVehicle(String vID, String dName, String delStatus) throws InvalidVehicleIDException {
+//        validateVehicleId(vID);
+//        this.vehicleId = vID;
+//        this.driverName = dName;
+//        this.deliveryStatus = delStatus;
+//    }
+    public DeliveryVehicle(String vID, String dName, String delStatus) {
+        validateVehicleId(vID);
         this.vehicleId = vID;
         this.driverName = dName;
         this.deliveryStatus = delStatus;
     }
 
-    private void validateVehicleId(String vehicleId) throws InvalidVehicleIDException {
+//    private void validateVehicleId(String vehicleId) throws InvalidVehicleIDException {
+//        if (vehicleId == null || vehicleId.isBlank()) {
+//            throw new InvalidVehicleIDException("Vehicle ID cannot be empty.");
+//        }
+//    }
+    private void validateVehicleId(String vehicleId) {
         if (vehicleId == null || vehicleId.isBlank()) {
-            throw new InvalidVehicleIDException("Vehicle ID cannot be empty.");
+            throw new IllegalArgumentException("Vehicle ID cannot be empty.");
         }
     }
 
@@ -43,10 +54,21 @@ public abstract class DeliveryVehicle implements Trackable {
     }
 
     // Common superclass method 
-    public void startDelivery() throws VehicleNotAvailableException {
+//    public void startDelivery() throws VehicleNotAvailableException {
+//
+//        if (!deliveryStatus.equalsIgnoreCase("Available")) {
+//            throw new VehicleNotAvailableException(
+//                    "Vehicle " + vehicleId + " is currently not available");
+//        }
+//
+//        System.out.println(
+//                driverName + " has started a delivery."
+//        );
+//    }
+    public void startDelivery() {
 
         if (!deliveryStatus.equalsIgnoreCase("Available")) {
-            throw new VehicleNotAvailableException(
+            throw new IllegalArgumentException(
                     "Vehicle " + vehicleId + " is currently not available");
         }
 

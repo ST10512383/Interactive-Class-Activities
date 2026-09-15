@@ -6,7 +6,11 @@ public class Truck extends DeliveryVehicle {
 
     private int weight;
 
-    public Truck(String vehicleId, String driverName, String deliveryStatus, int weight) throws InvalidVehicleIDException, InvalidCapacityException {
+//    public Truck(String vehicleId, String driverName, String deliveryStatus, int weight) throws InvalidVehicleIDException, InvalidCapacityException {
+//        super(vehicleId, driverName, deliveryStatus);
+//        setMaximumWeight(weight);
+//    }
+    public Truck(String vehicleId, String driverName, String deliveryStatus, int weight) {
         super(vehicleId, driverName, deliveryStatus);
         setMaximumWeight(weight);
     }
@@ -16,9 +20,15 @@ public class Truck extends DeliveryVehicle {
     }
 
     // Setter: Accepts the value of the truck's maxumum weight
-    public void setMaximumWeight(int weight) throws InvalidCapacityException {
+//    public void setMaximumWeight(int weight) throws InvalidCapacityException {
+//        if (weight <= 0) {
+//            throw new InvalidCapacityException("Maximum weight " + weight + " must be greater than zero.");
+//        }
+//        this.weight = weight;
+//    }
+    public void setMaximumWeight(int weight) {
         if (weight <= 0) {
-            throw new InvalidCapacityException("Maximum weight " + weight + " must be greater than zero.");
+            throw new IllegalArgumentException("Maximum weight " + weight + " must be greater than zero.");
         }
         this.weight = weight;
     }
