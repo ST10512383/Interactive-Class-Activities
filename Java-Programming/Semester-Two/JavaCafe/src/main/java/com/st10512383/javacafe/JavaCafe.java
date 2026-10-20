@@ -4,6 +4,10 @@
  */
 package com.st10512383.javacafe;
 
+import javax.swing.JOptionPane;
+import java.io.IOException;
+import java.io.FileWriter;
+
 /**
  *
  * @author CALBIX
@@ -19,8 +23,66 @@ public class JavaCafe extends javax.swing.JFrame {
         initComponents();
     }
 
+    // Logic to generate order summary
     private void generateOrderSummary() {
+        try {
+            String mainIngredient = cmb_MainIngredient.getSelectedItem().toString();
+            String bread = cmb_BreadChoices.getSelectedItem().toString();
+            StringBuilder toppings = new StringBuilder();
+            
+            if (cbxLettuce.isSelected()) {
+                toppings.append("Lettuce, ");
+            }
+            if (cbxBellPeppers.isSelected()) {
+                toppings.append("Bell Peppers, ");
+            }
+            if (cbxCheese.isSelected()) {
+                toppings.append("Cheese, ");
+            }
+            if (cbxTomato.isSelected()) {
+                toppings.append("Tomato, ");
+            }
+            if (toppings.length() > 0) {
+                toppings.setLength(toppings.length()-2);
+            }
+            
+            boolean isToasted = toastedRbtn.isSelected();
+            
+            String instructions = txtASpecialInstructions.getText();
+            
+            String summary = String.format("Bread: %s\nMain Ingredient: %s\nToppings: %s\nToasted: %s\nSpecial Instructions: %s",
+                    bread,
+                    mainIngredient,
+                    toppings.toString(),
+                    (isToasted ? "Yes" : "No"),
+                    instructions);
+            
+            txtAOrderSum.setText(summary);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error generating order summary: " + e.getMessage());
+        }
+    }
+
+    // Logic to save an order to a text file
+    private void saveOrder() {
+        String summary = txtAOrderSum.getText();
         
+        if (summary.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please generate an order summary first");
+            return;
+        }
+        
+        String dateTime = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss_sss").format(new java.util.Date());
+        
+        String fileName = "order_" + dateTime + ".txt";
+        
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write(summary);
+            JOptionPane.showMessageDialog(this, "Order successfully saved! File: " + fileName);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error saving order to the text file: " + e.getMessage());
+        }
     }
 
     /**
@@ -34,8 +96,8 @@ public class JavaCafe extends javax.swing.JFrame {
 
         toastedButtonGroup = new javax.swing.ButtonGroup();
         title = new javax.swing.JLabel();
-        mainIngredientComBox = new javax.swing.JComboBox<>();
-        breadComBox = new javax.swing.JComboBox<>();
+        cmb_MainIngredient = new javax.swing.JComboBox<>();
+        cmb_BreadChoices = new javax.swing.JComboBox<>();
         mainIngredientLabel = new javax.swing.JLabel();
         breadOptionsLabel = new javax.swing.JLabel();
         toppingsLabel = new javax.swing.JLabel();
@@ -66,10 +128,10 @@ public class JavaCafe extends javax.swing.JFrame {
         title.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         title.setText("Prog Cafe - Sandwich Order App");
 
-        mainIngredientComBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chicken", "Beef", "Veggie Patty", "Tuna" }));
+        cmb_MainIngredient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chicken", "Beef", "Veggie Patty", "Tuna" }));
 
-        breadComBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "White Bread", "Whole-Wheat Bread", "Brown Bread", "Gluten-Free", "Rye Bread" }));
-        breadComBox.addActionListener(this::breadComBoxActionPerformed);
+        cmb_BreadChoices.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "White Bread", "Whole-Wheat Bread", "Brown Bread", "Gluten-Free", "Rye Bread" }));
+        cmb_BreadChoices.addActionListener(this::cmb_BreadChoicesActionPerformed);
 
         mainIngredientLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         mainIngredientLabel.setText("Main Ingredient:");
@@ -93,6 +155,7 @@ public class JavaCafe extends javax.swing.JFrame {
         cbxLettuce.addActionListener(this::cbxLettuceActionPerformed);
 
         cbxCheese.setText("Cheese");
+        cbxCheese.addActionListener(this::cbxCheeseActionPerformed);
 
         cbxBellPeppers.setText("Bell Peppers");
         cbxBellPeppers.addActionListener(this::cbxBellPeppersActionPerformed);
@@ -150,28 +213,6 @@ public class JavaCafe extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(title)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(toastedLabel)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(toastedRbtn)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(nonToastedRbtn))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(toppingsLabel)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbxLettuce)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbxBellPeppers)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbxCheese, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addComponent(cbxTomato, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -189,12 +230,32 @@ public class JavaCafe extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(mainIngredientLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(mainIngredientComBox, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmb_MainIngredient, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(breadOptionsLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(breadComBox, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(42, 42, 42))))
+                                .addComponent(cmb_BreadChoices, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(42, 42, 42))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(title)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(toastedLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(toastedRbtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(nonToastedRbtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(toppingsLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxLettuce)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxBellPeppers)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxCheese, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxTomato, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,8 +264,8 @@ public class JavaCafe extends javax.swing.JFrame {
                 .addComponent(title)
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mainIngredientComBox, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(breadComBox, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_MainIngredient, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_BreadChoices, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mainIngredientLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(breadOptionsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -212,8 +273,8 @@ public class JavaCafe extends javax.swing.JFrame {
                     .addComponent(cbxLettuce)
                     .addComponent(cbxCheese)
                     .addComponent(cbxBellPeppers)
-                    .addComponent(cbxTomato)
-                    .addComponent(toppingsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(toppingsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxTomato))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(toastedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,16 +299,16 @@ public class JavaCafe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void displayMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayMenuItemActionPerformed
-        // TODO add your handling code here:
+        generateOrderSummary();
     }//GEN-LAST:event_displayMenuItemActionPerformed
 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
-        // TODO add your handling code here:
+        saveOrder();
     }//GEN-LAST:event_saveMenuItemActionPerformed
 
-    private void breadComBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breadComBoxActionPerformed
+    private void cmb_BreadChoicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_BreadChoicesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_breadComBoxActionPerformed
+    }//GEN-LAST:event_cmb_BreadChoicesActionPerformed
 
     private void cbxLettuceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLettuceActionPerformed
         // TODO add your handling code here:
@@ -262,12 +323,16 @@ public class JavaCafe extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxBellPeppersActionPerformed
 
     private void displayOrderSummaryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayOrderSummaryBtnActionPerformed
-        // TODO add your handling code here:
+        generateOrderSummary();
     }//GEN-LAST:event_displayOrderSummaryBtnActionPerformed
 
     private void saveSummarytoTextFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSummarytoTextFileBtnActionPerformed
-
+        saveOrder();
     }//GEN-LAST:event_saveSummarytoTextFileBtnActionPerformed
+
+    private void cbxCheeseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCheeseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCheeseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,19 +360,19 @@ public class JavaCafe extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> breadComBox;
     private javax.swing.JLabel breadOptionsLabel;
     private javax.swing.JCheckBox cbxBellPeppers;
     private javax.swing.JCheckBox cbxCheese;
     private javax.swing.JCheckBox cbxLettuce;
     private javax.swing.JCheckBox cbxTomato;
+    private javax.swing.JComboBox<String> cmb_BreadChoices;
+    private javax.swing.JComboBox<String> cmb_MainIngredient;
     private javax.swing.JMenu displayMenu;
     private javax.swing.JMenuItem displayMenuItem;
     private javax.swing.JButton displayOrderSummaryBtn;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JComboBox<String> mainIngredientComBox;
     private javax.swing.JLabel mainIngredientLabel;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JRadioButton nonToastedRbtn;
